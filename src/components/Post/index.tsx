@@ -1,11 +1,10 @@
-import { format, formatDistanceToNow } from "date-fns";
-import { Avatar } from "../Avatar";
-import { Comment } from "../Comment";
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+import React, { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 
-import ptBR from "date-fns/locale/pt-BR";
-
-import styles from "./Post.module.css";
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
+import { Avatar } from '../Avatar';
+import { Comment } from '../Comment';
+import styles from './Post.module.css';
 
 type Author = {
   name: string;
@@ -19,7 +18,7 @@ export type CommentData = {
 };
 
 type Content = {
-  type: "paragraph" | "link";
+  type: 'paragraph' | 'link';
   content: string;
 };
 
@@ -38,9 +37,9 @@ export const Post = ({ post }: PostProps) => {
   const { author, content, publishedAt } = post;
 
   const [comments, setComments] = useState<CommentData[]>([
-    { id: 1, text: "Post muito bacana!!" },
+    { id: 1, text: 'Post muito bacana!!' },
   ]);
-  const [newCommentText, setNewCommentText] = useState("");
+  const [newCommentText, setNewCommentText] = useState('');
 
   const publishedDateFormatted = format(
     publishedAt,
@@ -59,23 +58,23 @@ export const Post = ({ post }: PostProps) => {
       ...comments,
       { id: comments.length + 1, text: newCommentText },
     ]);
-    setNewCommentText("");
+    setNewCommentText('');
   };
 
   const handleNewCommentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    event.target.setCustomValidity("");
+    event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
   };
 
   const handleNewCommentInvalid = (
     event: InvalidEvent<HTMLTextAreaElement>
   ) => {
-    event.target.setCustomValidity("Esse campo é obrigatório!");
+    event.target.setCustomValidity('Esse campo é obrigatório!');
   };
 
   const deleteComment = (commentToDelete: CommentData) => {
     const commentsWithoutDeletedOne = comments.filter(
-      (comment) => comment.id !== commentToDelete.id
+      comment => comment.id !== commentToDelete.id
     );
     setComments(commentsWithoutDeletedOne);
   };
@@ -104,12 +103,12 @@ export const Post = ({ post }: PostProps) => {
       </header>
 
       <div className={styles.content}>
-        {content.map((item) => {
-          if (item.type === "paragraph") {
+        {content.map(item => {
+          if (item.type === 'paragraph') {
             return <p key={item.content}>{item.content}</p>;
           }
 
-          if (item.type === "link") {
+          if (item.type === 'link') {
             return (
               <p key={item.content}>
                 <a href="#">{item.content}</a>
@@ -117,7 +116,7 @@ export const Post = ({ post }: PostProps) => {
             );
           }
 
-          return <p>{item.content}</p>;
+          return <p key={item.content}>{item.content}</p>;
         })}
       </div>
 
@@ -141,7 +140,7 @@ export const Post = ({ post }: PostProps) => {
       </form>
 
       <div className={styles.commentList}>
-        {comments.map((item) => (
+        {comments.map(item => (
           <Comment
             key={item.id}
             content={item}

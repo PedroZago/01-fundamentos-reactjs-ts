@@ -1,8 +1,9 @@
-import { ThumbsUp, Trash } from "phosphor-react";
-import { useState } from "react";
-import { Avatar } from "../Avatar";
-import { CommentData } from "../Post";
-import styles from "./Comment.module.css";
+import { ThumbsUp, Trash } from 'phosphor-react';
+import React, { useState } from 'react';
+
+import { Avatar } from '../Avatar';
+import { CommentData } from '../Post';
+import styles from './Comment.module.css';
 
 interface CommentProps {
   content: CommentData;
@@ -17,11 +18,7 @@ export const Comment = ({ content, onDeleteComment }: CommentProps) => {
   };
 
   const handleLikeComment = () => {
-    setLikeCount((oldState) => oldState + 1);
-    setLikeCount((oldState) => oldState + 1);
-    setLikeCount((oldState) => oldState + 1);
-    setLikeCount((oldState) => oldState + 1);
-    setLikeCount((oldState) => oldState + 1);
+    setLikeCount(oldState => oldState + 1);
   };
 
   return (
